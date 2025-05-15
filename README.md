@@ -26,6 +26,7 @@ Tekstin tärkeimmät osat:
 - [Keychron näppis asetukset/ongelmat](#keychron-näppis-asetuksetongelmat)
   - [KEYCHRON SETTINGS](#keychron-settings)
   - [KEYCHRON ON OHJAIN JA SE PILAA ELÄMÄN](#keychron-on-ohjain-ja-se-pilaa-elämän)
+- [Sovellus suositukset](#sovellus-suositukset)
 - [GAMING](#gaming)
   - [Discord](#discord)
 - [ONGELMA TILANTEET](#ongelma-tilanteet)
@@ -177,6 +178,25 @@ SUBSYSTEM=="input", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0353", KERNEL=="
 ^^^^^
   
 *Boom gone. Katos ku pieru saharaan. Ei oo enää System Settingsissä ohjaimena Keychronia.*
+
+
+## Sovellus suositukset
+  
+Lista omista ehdottoman lenppareista lemppari sovelluksista ilman pahempaa syytä:
+  
+- Fsearch ja Catfish
+  - Fsearch löytää paremmin kaikki
+  - Catfish löytää tekstin sisältä paremmin kaikki. Hyvä olla molemmat valmiina asennettuna.
+- Kate = Notepad++
+- Gparted
+- Lutris
+- LACT (AMD GPU overclock tool)
+- GPU Screen Recorder (Shadow Play UI:lla)
+- MangoHud + Goverlay
+  - MangoHudil hyvä hudi ofc ja Goverlayllä helppo conffata ja saa parhaiten FPS_Limitin conffattua
+- ProtonUpQT
+- Pavucontrol
+  - Ois kiva tietää kunnon volume control tai tällänen et voi säätää kunnol asetuksii mut tää on kans iha ookoo ☺️
 
   
 ## GAMING
