@@ -26,9 +26,9 @@ Tekstin tärkeimmät osat:
 - [Keychron näppis asetukset/ongelmat](#keychron-näppis-asetuksetongelmat)
   - [KEYCHRON SETTINGS](#keychron-settings)
   - [KEYCHRON ON OHJAIN JA SE PILAA ELÄMÄN](#keychron-on-ohjain-ja-se-pilaa-elämän)
--[GAMING](#gaming)
+- [GAMING](#gaming)
   - [Discord](#discord)
--[ONGELMA TILANTEET](#ongelma-tilanteet)
+- [ONGELMA TILANTEET](#ongelma-tilanteet)
   
 ## Partition
   
