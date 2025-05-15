@@ -126,7 +126,7 @@ sudo pacman -S xdg-desktop-portal xdg-desktop-portal-kde
 Tällä pitäis saada Firefoxilla ja PCmanFM:llä toimimaan paremmin file save file openingit? Jos käyttää Dolphinia, niin en oo varma tartteeko tätä asentaa.
   
 ## Keychron näppis asetukset/ongelmat
-KEYCHRON SETTINGS
+### KEYCHRON SETTINGS
 Etsi Keychron ->
 ```
 sudo dmesg | grep -i "keychron" /
@@ -139,6 +139,29 @@ Löydä se-> `hid-generic 0003:3434:0353.0005: hiddev97,hidraw5: USB HID v1.11 D
 Anna sille muokkausoikeudet, että pystyt Chromium -selaimella muokkaamaan asetuksia:
 
 `sudo chmod a+rw /dev/hidraw5`
+  
+### KEYCHRON ON OHJAIN JA SE PILAA ELÄMÄN
+  
+Search:
+```
+lsusb
+```
+```
+dmesg | grep -i "keychron"
+lsmod | grep joy
+```
+Make edits to file:
+```
+kate /lib/udev/rules.d/99-keychron-blacklist.rules
+SUBSYSTEM=="input", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0353", KERNEL=="event*", ENV{ID_INPUT_JOYSTICK}="0"
+```
+`udevadm test /dev/input/event7` tai event5 tai mikä lie lukee Gamepad asetuksissa.
+
+`sudo udevadm control --reload-rules` ja `sudo udevadm trigger`
+^^^^^
+  
+*Boom gone. Katos ku pieru saharaan. Ei oo enää System Settingsissä ohjaimena Keychronia.*
+
   
 ## GAMING
   
@@ -178,4 +201,46 @@ lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader sdl2-compa
 Asenna se pacmanilla. Thas it
   
 `sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/VencordInstaller/main/install.sh)"`
+  
+## ONGELMA TILANTEET
+  
+Launchaa sovellus tai muu terminaalin kautta. Esimerkki debuggauksesta:
 
+ INFO drg_mod_integration: writing logs to `/home/saku/.local/share/drg-mod-integration/drg-mod-integration.log`
+interface 'wl_surface' has no event 2
+  
+Netistä löyty jotain ongelmia Waylandin ja X11 kanssa. Vastauksena on WINIT_UNIX_BACKEND=x11 jotta voidaan avata drg-mod-integration:
+
+->->
+kate /.zshrc
+->->
+```
+# Use powerline
+USE_POWERLINE="true"
+# Has weird character width
+# Example:
+#    is not a diamond
+export WINIT_UNIX_BACKEND=x11
+HAS_WIDECHARS="false"
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
+```
+Sinne lisäät vaikka pohjalle:
+"export WINIT_UNIX_BACKEND=x11"
+
+Tallenna, `source /.zshrc` terminaaliin ja avaat terminaalin kautta `./drg-mod-integration` ja ei tuu mitää virheitä ja softa aukeaa.
+Tai sitten bash skripti:
+  
+`kate ./paskaperse.sh`
+  
+```
+#!/bin/bash
+export WINIT_UNIX_BACKEND=x11
+./drg_mod_integration
+```
