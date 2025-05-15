@@ -13,6 +13,22 @@ Tekstin tärkeimmät osat:
 - Huomio, onko X11 vai Wayland käytössä
   - ITSE KÄYTÄN WAYLANDia KOSKA SE TOIMII AMD:LLÄ AINAKI HENK.KOHT. PAREMMIN JA ON VIILEEMPI 😎😎😎 X11 on Nvidia vaihtoehto. Vitusti ongelmia ainakin Wayland + Nvidia läppäril... 
 - Tulee mieleen joskus lisää...
+
+# SISÄLTÖ
+- [Manjaro-seikkailut](#manjaro-seikkailut)
+- [Partition](#partition)
+- [Network asetukset](#network-asetukset)
+- [Kernel asetukset](#kernel-asetukset)
+- [GRUB boot settings](#grub-boot-settings)
+- [Environment variables](#environment-variables)
+- [Kovalevy / SSD / Partitionit](#kovalevy--ssd--partitionit)
+- [FILEMANAGERS PCmanFM Dolphin mitä lie](#filemanagers-pcmanfm-dolphin-mitä-lie)
+- [Keychron näppis asetukset/ongelmat](#keychron-näppis-asetuksetongelmat)
+  - [KEYCHRON SETTINGS](#keychron-settings)
+  - [KEYCHRON ON OHJAIN JA SE PILAA ELÄMÄN](#keychron-on-ohjain-ja-se-pilaa-elämän)
+-[GAMING](#gaming)
+  - [Discord](#discord)
+-[ONGELMA TILANTEET](#ongelma-tilanteet)
   
 ## Partition
   
@@ -175,18 +191,13 @@ Lainaten rajusti:
 Arch/EndeavourOS/Manjaro/Other Arch derivatives
 
 Enable multilib:
-
+```
 To enable multilib repository, uncomment the [multilib] section in /etc/pacman.conf
-
-/etc/pacman.conf
---------------------------------------------------------------------------------------
 [multilib]
 Include = /etc/pacman.d/mirrorlist
-
-Sitten päivittä paketit ja asennat wine komponentit:
+```
+Sitten päivittä paketit ja asennat wine komponentit: `sudo pacman -Syu`
   
-`sudo pacman -Syu` 
- 
 ```
 sudo pacman -S wine-staging
 
