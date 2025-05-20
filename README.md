@@ -1,8 +1,10 @@
 # Manjaro-seikkailut
 
 Hauska seikkailu. Omat kokemukset ja turhautumiset kasattuna.
-
+  
 Tekstin tärkeimmät osat:
+-
+- Lue [Arch Linux](https://wiki.archlinux.org/title/Arch_Linux) -wikiä. Sielä saattaa olla joskus vanhentunutta tietoa ja "väärää", mutta esim. [kuinka saadaan thumbnail](https://wiki.archlinux.org/title/File_manager_functionality#Thumbnail_previews) -kuvakkeet näkymään resurssienhallinnassa.
 - Tee päiväkirjaa muutoksista mitä oot tehny laitteelle (txt tiedosto)
   - Helpottaa ongelmanratkaisuissa. Myös selkeyttää mitä on menny vahingossa asentamaan ja missä mahdolliset systemd -konfliktit
 - Et v*ttu käytä Flatpak jos pamac/pacman/AUR on käytössä. Turha pintapuoleinen softa joka aiheuttaa hiusten menetystä.
@@ -11,8 +13,15 @@ Tekstin tärkeimmät osat:
   - Näille on ohjeet, muistaakseni GPU Screen Recorder varoittaa Logeissa, että jos on asentanu Flatpakin ennemmin, täytyy muistaa poistaa ne systemd configit ja tehdä tarvittavat muutokset kuten daemon-reload
 - Tarkista Linux kernel ja näyttisajurit.
 - Huomio, onko X11 vai Wayland käytössä
-  - ITSE KÄYTÄN WAYLANDia KOSKA SE TOIMII AMD:LLÄ AINAKI HENK.KOHT. PAREMMIN JA ON VIILEEMPI 😎😎😎 X11 on Nvidia vaihtoehto. Vitusti ongelmia ainakin Wayland + Nvidia läppäril... 
+  - ITSE KÄYTÄN WAYLANDia KOSKA SE TOIMII AMD:LLÄ AINAKI HENK.KOHT. PAREMMIN JA ON VIILEEMPI 😎😎😎 X11 on Nvidia vaihtoehto. Piruuusti ongelmia ainakin Wayland + Nvidia läppäril... 
 - Tulee mieleen joskus lisää...
+
+Selvittämättömät ongelmat: 
+- 
+- Sleep mode ei toimi? Ehkä BIOS ongelma
+  - Sleep -> Hard reset
+  - Sleep -> Login Screen -> Hard reset
+  - Hibernation toimii? Mutta ei niin käytännöllinen
 
 # SISÄLTÖ
 - [Manjaro-seikkailut](#manjaro-seikkailut)
@@ -37,7 +46,7 @@ Helppoo ku lasten hakkaaminen:
   
 Luot: 
 - BOOT/EFI: 300 MiB. filesystem: `fat32` sen Mount `/boot/efi` ja tägiksi vaan boot
-- SWAP: 1GiB - 100?GiB. filesystem: `linuxswap` tägi swap se on siinä. Mä laitoin kovalla kädellä noin 50GB
+- SWAP: 1GiB - 100?GiB. filesystem: `linuxswap` tägi swap se on siinä. Mä laitoin kovalla kädellä noin 50GB joka saatto olla liikaa ja ei taida edes toimia? Läppärillä on 8GB annettuna.
 - ROOT: Loput tai tarpeeksi GiB. filesystem: `btrfs` tai `ext4` sijainti `/` ja vaik tägiks "Windows11" tai jotain muuta kivaa
   - Ite laitoin ext4 koska btrfs on "uudempi" ja "hitaampi". Mut YMMV.
   
@@ -67,9 +76,11 @@ List Installed: `mhwd-kernel -li`
 Itse asennus kernelille 6.14: `sudo mhwd-kernel -i linux614`
 
 ## GRUB boot settings
-
+  
+`split_lock_detect=off` jostain syystä ongelma ja täytyy olla OFF että kone toimii eikä kaatuile. [Level1Techs](https://forum.level1techs.com/t/9070-and-9070-xt-setup-notes-for-linux/227038)
+  
 `kate /etc/default/grub`
-
+  
 ```
 # GRUB boot loader configuration
 
