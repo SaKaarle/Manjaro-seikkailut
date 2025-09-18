@@ -12,11 +12,12 @@ ZINK > OPENGL
   
 # Experimental commands:
 #####################
-`PROTON_USE_WINED3D=1 = wined3d=1 DX to OpenGL`
+`PROTON_USE_WINED3D=1` = wined3d=1 DX to OpenGL
 #####
   
-`PROTON_USE_VKD3D=1 = DX12 -> Vulkan`
-`PROTON_USE_DXVK=1 Forces DXVK (DX11→Vulkan) for DX11 games.`
+`PROTON_USE_VKD3D=1` = DX12 -> Vulkan
+`PROTON_USE_DXVK=1` = Forces DXVK (DX11→Vulkan) for DX11 games.
+`PROTON_NO_ESYNC=1` = PROTON_NO_FSYNC=1 RADV_PERFTEST=gpl
 #####
   
 `RADV_PERFTEST=llvm` -> Deprecated
