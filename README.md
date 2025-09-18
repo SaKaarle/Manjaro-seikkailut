@@ -25,6 +25,7 @@ Selvittämättömät ongelmat:
 
 # SISÄLTÖ
 - [Manjaro-seikkailut](#manjaro-seikkailut)
+- [Gaming](https://github.com/SaKaarle/Manjaro-seikkailut/blob/main/Gaming/Readme.md)
 - [Partition](#partition)
 - [Network asetukset](#network-asetukset)
 - [Kernel asetukset](#kernel-asetukset)
