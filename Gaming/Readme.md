@@ -4,23 +4,25 @@ Kun päivittää Screen Recorderia:
 `systemctl restart --user gpu-screen-recorder-ui`
 `gsr-ui`   -> Gpu Screen Recording
 
-ZINK > OPENGL
-`MESA_LOADER_DRIVER_OVERRIDE=zink`
-`MESA_LOADER_DRIVER_OVERRIDE=zink glxinfo | grep 'renderer string'`
-❯ `yay -Sd mesa-git lib32-mesa-git`
 
+ZINK > OPENGL
+  
+`MESA_LOADER_DRIVER_OVERRIDE=zink`
+`MESA_LOADER_DRIVER_OVERRIDE=zink glxinfo | grep 'renderer string'` ❯ `yay -Sd mesa-git lib32-mesa-git`
+  
 # Experimental commands:
 #####################
 `PROTON_USE_WINED3D=1 = wined3d=1 DX to OpenGL`
 #####
+  
 `PROTON_USE_VKD3D=1 = DX12 -> Vulkan`
 `PROTON_USE_DXVK=1 Forces DXVK (DX11→Vulkan) for DX11 games.`
 #####
+  
 `RADV_PERFTEST=llvm` -> Deprecated
 `gamemoderun PROTON_ENABLE_WAYLAND=1 RADV_PERFTEST=llvm %command%`
 `RADV_DEBUG=llvm`
-
-
+  
 `gamemoderun PROTON_ENABLE_WAYLAND=1 PROTON_USE_WINED3D=1 %command%` #DX9-11 -> OpenGL
 `LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so gamemoderun SDL_VULKAN_DRIVER=wayland RADV_PERFTEST=llvm %command%`
 #####
@@ -47,9 +49,9 @@ ZINK > OPENGL
 ##################################
 ##################################
 
-## ## ##
+
 ## KAIKKIIN PELEIHIN TÄMÄ
-## ## ## 
+
 ```LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so gamemoderun PROTON_ENABLE_WAYLAND=1 %command%```
 PROTON_ENABLE_WAYLAND=1 = Vulkan peleille?
 
@@ -70,11 +72,12 @@ Eitoimi mut:
 Virheellinen, korjattavaa:
 `gamemoderun LD_PRELOAD="" PROTON_USE_WINED3D=1 PROTON_ENABLE_D8VK=1 MESA_LOADER_DRIVER_OVERRIDE=zink PROTON_ENABLE_WAYLAND=1 %command% --force-grab-cursor`
   
-####Update GameRecorder####
-
+## Update GameRecorder 
+  
 GPU Screen Recorder UI has updated. Run '`systemctl restart --user gpu-screen-recorder-ui`' to use the new version of the software without rebooting
   
-
+## OptiScaler
+```
  OptiScaler setup completed successfully...
 
   ___
@@ -91,6 +94,8 @@ Example, if using Steam, add this to launch options:
 Remember: Insert key opens OptiScaler overlay, Page Up/Down for performance stats
 
 Press Enter to exit...
+```
+
 
 #####################
 # Mangohud
