@@ -88,12 +88,15 @@ Itse asennus kernelille 6.14: `sudo mhwd-kernel -i linux614`
 GRUB_DEFAULT=saved
 GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR='Manjaro'
-GRUB_CMDLINE_LINUX_DEFAULT='quiet splash resume=UUID=4c564bec-d05d-486e-8565-eda1a3cfddc2 udev.log_priority=3'
+GRUB_CMDLINE_LINUX_DEFAULT='quiet splash resume=UUID=4c564bec-d05d-486e-8565-eda1a3cfddc2 udev.log_priority=3' # TAI GRUB_CMDLINE_LINUX="amdgpu.ppfeaturemask=0xffffffff amdgpu.dc=1 amdgpu.runpm=0 amdgpu.dcdebugmask=0x10 amdgpu.dcdebugmask=0x12 amdgpu.dcdebugmask=0x400 split_lock_detect=off". Vähentää mahd. näyttiksen kaatumista kernelin tasolla. AMDGPU:lla jokin ongelma
 GRUB_CMDLINE_LINUX="amdgpu.dcdebugmask=0x400 split_lock_detect=off"
 
 ...
 ```
-
+  
+Toinen mahdollinen fikis:
+` GRUB_CMDLINE_LINUX="amdgpu.ppfeaturemask=0xffffffff amdgpu.dc=1 amdgpu.runpm=0 amdgpu.dcdebugmask=0x10 amdgpu.dcdebugmask=0x12 `
+  
 ## Environment variables
   
 `kate /etc/environment`
