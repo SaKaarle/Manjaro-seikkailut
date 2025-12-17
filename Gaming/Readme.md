@@ -5,6 +5,19 @@ Kun päivittää Screen Recorderia:
 `gsr-ui`   -> Gpu Screen Recording
 
 
+## WINE / WINE32
+  
+Hae sun winet:
+  
+```
+sudo find / -name "system.reg" -type f
+find ~ -name "system.reg" -type f
+```
+ 
+`WINEPREFIX="/home/saku/Games/gog/deus-ex/" winetricks`
+`WINEPREFIX=/home/saku/Games/gog/deus-ex-invisible-war winetricks`
+`WINE=/home/saku/.local/share/lutris/runners/wine/wine-10.19-amd64/bin/wine WINEPREFIX=/home/saku/Games/gog/deus-ex-invisible-war winetricks`
+
 
 ZINK > OPENGL
   
