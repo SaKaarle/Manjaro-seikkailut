@@ -121,6 +121,29 @@ KWIN_DRM_NO_DIRECT_SCANOUT=1
 #WINEPREFIX=~/.wine
 #WINEARCH=win64
 
+## 2025 joulu ##
+
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#
+
+# WINEARCH=win32 WINEPREFIX=~/.wine winecfg
+
+MANGOHUD=1
+# MANGOHUD_DLSYM=1
+LD_PRELOAD=/usr/lib/mangohud/libMangoHud.so
+GTK_USE_PORTAL=1
+MOZ_ENABLE_WAYLAND=1
+KWIN_DRM_NO_DIRECT_SCANOUT=1
+WLR_SCENE_DISABLE_DIRECT_SCANOUT=1
+AMD_VULKAN_ICD=RADV
+MESA_SHADER_CACHE_MAX_SIZE=20G
+# WINEPREFIX=~/.wine
+# WINEARCH=win64 WINEPREFIX=~/.wine winecfg
+
+
 ```
 
 ## Kovalevy / SSD / Partitionit
@@ -128,9 +151,33 @@ KWIN_DRM_NO_DIRECT_SCANOUT=1
 Hyvät selitykset ja ohjeet jos tuut jostain Windowsista ja sullon NTFS kovoja: 
 https://github.com/ValveSoftware/Proton/wiki/Using-a-NTFS-disk-with-Linux-and-Windows
   
-Konsole: `kate /etc/fstab`
-->
+Käytä mielummin EXT4 tai vastaavaa. Stabiilisuus ongelmat NTFS-3 kanssa. NTFSplus on tulossa ja testaamatta.
+  
+```
+lsblk -o NAME,FSTYPE,UUID,MOUNTPOINTS                                                                                    ✔ 
 
+NAME        FSTYPE UUID                                 MOUNTPOINTS
+sda                                                     
+└─sda1      ext4   37bd1f24-f3ca-4f21-82c2-625243a3bf6c /media/hdd2tb
+sdb                                                     
+└─sdb1      ext4   28c3b6b9-618f-46b7-8e43-9a19142808bd /media/hdd4tb
+sdc                                                     
+└─sdc1      ext4   f078da2f-158e-4037-84ba-bc950c2b50c4 /media/ssdpny
+nvme1n1                                                 
+├─nvme1n1p1 swap   4c564bec-d05d-486e-8565-eda1a3cfddc2 [SWAP]
+├─nvme1n1p2 vfat   1028-C658                            /boot/efi
+└─nvme1n1p3 ext4   0db1ac5d-1b1f-48ad-9e71-bf802bf20501 /
+nvme0n1                                                 
+├─nvme0n1p1                                             
+├─nvme0n1p2 ntfs   E8FE4705FE46CC0E                     /media/winos
+├─nvme0n1p3 ntfs   EA22ABBB22AB8B61                     
+└─nvme0n1p4 ext4   ed6607b7-1260-4031-9ef2-d51abcf8b9a3 /media/winsteam
+```
+  
+Konsole: `kate /etc/fstab`
+  
+->
+  
 ```
 # /etc/fstab: static file system information.
 #
@@ -142,10 +189,15 @@ Konsole: `kate /etc/fstab`
 UUID=1028-C658                            /boot/efi      vfat    defaults,umask=0077 0 2
 UUID=4c564bec-d05d-486e-8565-eda1a3cfddc2 swap           swap    defaults   0 0
 UUID=0db1ac5d-1b1f-48ad-9e71-bf802bf20501 /              ext4    defaults   0 1
-UUID=FCBE07DCBE078DF8                     /media/winos     ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
-UUID=6E8886E08886A5E5                     /media/ssdpny    ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
-UUID=527549F625B1DD0D                     /media/hdd2tb    ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
-UUID=265C14915C145DBD                     /media/hdd4tb    ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
+UUID=E8FE4705FE46CC0E                     /media/winos     ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
+#UUID=35F24537031CD2D1                     /media/ssdpny    ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
+UUID=f078da2f-158e-4037-84ba-bc950c2b50c4 /media/ssdpny    ext4 defaults,nofail 0 2
+#UUID=527549F625B1DD0D                     /media/hdd2tb    ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
+UUID=37bd1f24-f3ca-4f21-82c2-625243a3bf6c /media/hdd2tb    ext4 defaults,nofail 0 2
+#UUID=265C14915C145DBD                     /media/hdd4tb    ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
+UUID=28c3b6b9-618f-46b7-8e43-9a19142808bd /media/hdd4tb    ext4 defaults,nofail 0 2
+#UUID=0852C72352C7147A                     /media/winsteam  ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
+UUID=ed6607b7-1260-4031-9ef2-d51abcf8b9a3 /media/winsteam  ext4 defaults,nofail 0 2
 #UUID=B83485AD34856F66                     /media/nvme      ntfs-3g defaults,uid=1000,gid=1000,rw,user,exec,nofail,umask=000 0 2
 tmpfs                                     /tmp           tmpfs   defaults,noatime,mode=1777 0 0
 
@@ -153,7 +205,7 @@ tmpfs                                     /tmp           tmpfs   defaults,noatim
 
 ## FILEMANAGERS PCmanFM Dolphin mitä lie
   
-sudo pacman -S xdg-desktop-portal xdg-desktop-portal-kde
+`sudo pacman -S xdg-desktop-portal xdg-desktop-portal-kde`
   
 Tällä pitäis saada Firefoxilla ja PCmanFM:llä toimimaan paremmin file save file openingit? Jos käyttää Dolphinia, niin en oo varma tartteeko tätä asentaa.
   
@@ -161,15 +213,18 @@ Tällä pitäis saada Firefoxilla ja PCmanFM:llä toimimaan paremmin file save f
 ### KEYCHRON SETTINGS
 Etsi Keychron ->
 ```
-sudo dmesg | grep -i "keychron" /
-sudo dmesg | grep hidraw
+sudo dmesg | grep -i "keychron" \
+sudo dmesg | grep hidraw \
+sudo dmesg | grep hiddev
+
 ```
-
-Löydä se-> `hid-generic 0003:3434:0353.0005: hiddev97,hidraw5: USB HID v1.11 Device [Keychron Keychron V5] on usb-0000:0c:00.3-2/input1`
-
-?lsusb
+  
+Löydä se "hiddev" -> `hid-generic 0003:3434:0353.0005: hiddev97,hidraw5: USB HID v1.11 Device [Keychron Keychron V5] on usb-0000:0c:00.3-2/input1`
+  
+`lsusb`
+  
 Anna sille muokkausoikeudet, että pystyt Chromium -selaimella muokkaamaan asetuksia:
-
+  
 `sudo chmod a+rw /dev/hidraw5`
   
 ### KEYCHRON ON OHJAIN JA SE PILAA ELÄMÄN
@@ -240,8 +295,18 @@ sudo pacman -S --needed --asdeps giflib lib32-giflib gnutls lib32-gnutls v4l-uti
 lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib sqlite lib32-sqlite libxcomposite \
 lib32-libxcomposite ocl-icd lib32-ocl-icd libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs \
 lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader sdl2-compat lib32-sdl2-compat
-```
 
+```
+  
+Asiaan tullut mahdollinen muutos koska Wine on tyhmä ja devit päätti lopettaa melkeen kokonaan 32-bit yhteensopivuuden, niin Wine32 paketti pitää asentaa jos haluaa uudemmat 32-bit supportit ja pelata esimerkiksi Deus Ex tai muita 32-bit pelejä Winellä.
+  
+```
+https://aur.archlinux.org/packages/wine32
+
+yay -S wine32
+
+```
+  
 ### Discord
   
 Asenna se pacmanilla. Thas it
