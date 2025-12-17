@@ -5,40 +5,54 @@ Kun päivittää Screen Recorderia:
 `gsr-ui`   -> Gpu Screen Recording
 
 
+
 ZINK > OPENGL
   
 `MESA_LOADER_DRIVER_OVERRIDE=zink`
 `MESA_LOADER_DRIVER_OVERRIDE=zink glxinfo | grep 'renderer string'` ❯ `yay -Sd mesa-git lib32-mesa-git`
   
 # Experimental commands:
-#####################
-`PROTON_USE_WINED3D=1` = wined3d=1 DX to OpenGL
-#####
   
+>
+  
+`PROTON_USE_WINED3D=1` = wined3d=1 DX to OpenGL
 `PROTON_USE_VKD3D=1` = DX12 -> Vulkan
 `PROTON_USE_DXVK=1` = Forces DXVK (DX11→Vulkan) for DX11 games.
 `PROTON_NO_ESYNC=1` = PROTON_NO_FSYNC=1 RADV_PERFTEST=gpl
-#####
   
+>
+  
+## PROTON CACHYOS MUUT PROTONit
+  
+CachyOS Proton tai Muu ei-wayland: `gamemoderun SDL_VIDEODRIVER=x11 %command%`
+  
+Enable in-game overlay: ` SDL_VIDEODRIVER=x11 %command% `
+
+
 `RADV_PERFTEST=llvm` -> Deprecated
 `gamemoderun PROTON_ENABLE_WAYLAND=1 RADV_PERFTEST=llvm %command%`
 `RADV_DEBUG=llvm`
   
 `gamemoderun PROTON_ENABLE_WAYLAND=1 PROTON_USE_WINED3D=1 %command%` #DX9-11 -> OpenGL
 `LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so gamemoderun SDL_VULKAN_DRIVER=wayland RADV_PERFTEST=llvm %command%`
-#####
+
   
-#####
-## KÄYNNISTÄÄ PELIN DXVK
+### KÄYNNISTÄÄ PELIN DXVK
   
-```WINEPREFIX="/home/saku/Games/gog/deus-ex" WINEDLLOVERRIDES="d3d11,d3d10core,d3d9=n,b" gamemoderun /home/saku/.local/share/lutris/runners/wine/wine-10.14-amd64/bin/wine '/home/saku/Games/gog/deus-ex/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.exe'```
-#####
-```LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so PROTON_USE_WINED3D=1 MESA_LOADER_DRIVER_OVERRIDE=zink gamemoderun %command%```
-#####
-```Exec=env WINEPREFIX="/home/saku/Games/gog/deus-ex" WINEDLLOVERRIDES="d3d11,d3d10core,d3d9=n,b" LD_PRELOAD="/usr/lib32/libgamemode.so:/usr/lib32/mangohud/libMangoHud.so" gamescope --prefer-vk-device 1002:7550 -w 1920 -h 1080 -W 1920 -H 1080 -- gamemoderun /home/saku/.local/share/lutris/runners/wine/wine-10.14-amd64/bin/wine '/home/saku/Games/gog/deus-ex/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.exe'```
+```
+WINEPREFIX="/home/saku/Games/gog/deus-ex" WINEDLLOVERRIDES="d3d11,d3d10core,d3d9=n,b" gamemoderun /home/saku/.local/share/lutris/runners/wine/wine-10.14-amd64/bin/wine '/home/saku/Games/gog/deus-ex/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.exe'
+```
+### ZINK
+```
+LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so PROTON_USE_WINED3D=1 MESA_LOADER_DRIVER_OVERRIDE=zink gamemoderun %command%
+
+```
   
-#####
-#####
+```
+Exec=env WINEPREFIX="/home/saku/Games/gog/deus-ex" WINEDLLOVERRIDES="d3d11,d3d10core,d3d9=n,b" LD_PRELOAD="/usr/lib32/libgamemode.so:/usr/lib32/mangohud/libMangoHud.so" gamescope --prefer-vk-device 1002:7550 -w 1920 -h 1080 -W 1920 -H 1080 -- gamemoderun /home/saku/.local/share/lutris/runners/wine/wine-10.14-amd64/bin/wine '/home/saku/Games/gog/deus-ex/drive_c/GOG Games/Deus Ex GOTY/System/DeusEx.exe'
+```
+  
+
   
 `gamescope -- gamemoderun PROTON_ENABLE_WAYLAND=1 %command%`
 `gamemoderun PROTON_ENABLE_WAYLAND=1 PROTON_USE_WINED3D=1 %command%`
@@ -46,17 +60,15 @@ ZINK > OPENGL
 `gamemoderun PROTON_ENABLE_WAYLAND=1 -- gamescope --force-grab-cursor %command%`
 `gamescope -w 1920 -h 1080  -- gamemoderun PROTON_ENABLE_WAYLAND=1 %command%`
   
-
-##################################
-##################################
-
-
 ## KAIKKIIN PELEIHIN TÄMÄ
 
 ```LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so gamemoderun PROTON_ENABLE_WAYLAND=1 %command%```
-PROTON_ENABLE_WAYLAND=1 = Vulkan peleille?
+PROTON_ENABLE_WAYLAND=1 = Vulkan peleille? 
 
 Gamemode check mangohudille: `LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so`
+## GAMESCOPE
+
+` gamescope -w 1920 -h 1080 -f --force-grab-cursor -- gamemoderun PROTON_ENABLE_WAYLAND=1  %command% `
 
 ## CS2
 `gamemoderun %command%`
@@ -64,6 +76,14 @@ Gamemode check mangohudille: `LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so`
 
 ```MANGOHUD_CONFIG="picmip=16" %command% gamemoderun PROTON_ENABLE_WAYLAND=1 LD_PRELOAD="" MANGOHUD_CONFIG="picmip=16, retro=1" %command% -vulkan -high```
   
+## NOITA
+  
+gamescope -w 1920 -h 1080 -- gamemoderun PROTON_ENABLE_WAYLAND=1 mangohud %command%
+gamescope -w 1920 -h 1080 -- gamemoderun MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink PROTON_ENABLE_WAYLAND=1 mangohud %command%
+MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink gamemoderun PROTON_ENABLE_WAYLAND=1 mangohud %command%
+gamemoderun MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink PROTON_ENABLE_WAYLAND=1 mangohud %command%
+  
+
 ## MGS2:
 Eitoimi mut: 
 `gamemoderun PROTON_ENABLE_WAYLAND=1 WINEDLLOVERRIDES="wininet,winhttp=n,b" %command%`
@@ -72,7 +92,16 @@ Eitoimi mut:
 ## KILLING FLOOR 
 Virheellinen, korjattavaa:
 `gamemoderun LD_PRELOAD="" PROTON_USE_WINED3D=1 PROTON_ENABLE_D8VK=1 MESA_LOADER_DRIVER_OVERRIDE=zink PROTON_ENABLE_WAYLAND=1 %command% --force-grab-cursor`
+
+## DRG:
   
+`LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so gamemoderun PROTON_ENABLE_WAYLAND=1 %command% -disablemodding`
+
+## GTAIV
+  
+`gamemoderun SDL_VIDEODRIVER=wayland WINEDLLOVERRIDES="dinput8,ScriptHook,AdvancedHook=n,b" %command%`
+  
+
 ## Update GameRecorder 
   
 GPU Screen Recorder UI has updated. Run '`systemctl restart --user gpu-screen-recorder-ui`' to use the new version of the software without rebooting
@@ -97,15 +126,11 @@ Remember: Insert key opens OptiScaler overlay, Page Up/Down for performance stat
 Press Enter to exit...
 ```
 
-
-#####################
+  
 # Mangohud
-
-
+  
 MANGOHUD BACKUP CONFIG
-#####################
-##################################################################
-
+  
 ```
 ################### File Generated by Goverlay ###################
 legacy_layout=false
