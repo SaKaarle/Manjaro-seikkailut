@@ -41,6 +41,7 @@ Selvittämättömät ongelmat:
   - [Discord](#discord)
 - [ONGELMA TILANTEET](#ongelma-tilanteet)
 - [FIREFOX](#Firefox)
+- [FreeCAD](#FreeCAD)
   
 ## Partition
   
@@ -372,4 +373,12 @@ media.getusermedia.audio.processing.noise.enabled
 media.getusermedia.audio.processing.hpf.enabled
 ```
 
+## FreeCAD
+  
+Wayland on buginen paska ja jäätyy ja on hidas. Täytyy käynnistää: `QT_QPA_PLATFORM=xcb` avulla, eli:
+  
+```
 
+QT_QPA_PLATFORM=xcb freecad
+
+```
