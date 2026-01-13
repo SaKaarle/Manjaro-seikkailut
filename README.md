@@ -40,6 +40,7 @@ Selvittämättömät ongelmat:
 - [GAMING](#gaming)
   - [Discord](#discord)
 - [ONGELMA TILANTEET](#ongelma-tilanteet)
+- [FIREFOX](#Firefox)
   
 ## Partition
   
@@ -355,3 +356,18 @@ Tai sitten bash skripti:
 export WINIT_UNIX_BACKEND=x11
 ./drg_mod_integration
 ```
+
+## FIREFOX
+  
+[Firefox Arch Wiki](https://wiki.archlinux.org/title/Firefox/Tweaks#Disable_WebRTC_audio_post_processing)
+  
+Teams tai muu selaimella käytettävä mikrofoni sovellus vaatii tämän, ellet halua kuulevia korvia tuhota täysin:
+  
+```
+media.getusermedia.audio.processing.aec.enabled 
+media.getusermedia.audio.processing.agc.enabled
+media.getusermedia.audio.processing.noise.enabled
+media.getusermedia.audio.processing.hpf.enabled
+```
+
+
