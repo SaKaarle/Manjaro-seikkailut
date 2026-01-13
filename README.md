@@ -363,6 +363,8 @@ export WINIT_UNIX_BACKEND=x11
   
 Teams tai muu selaimella käytettävä mikrofoni sovellus vaatii tämän, ellet halua kuulevia korvia tuhota täysin:
   
+URL: `about:config` ja yks kerralla: 
+  
 ```
 media.getusermedia.audio.processing.aec.enabled 
 media.getusermedia.audio.processing.agc.enabled
