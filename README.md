@@ -382,3 +382,42 @@ Wayland on buginen paska ja jäätyy ja on hidas. Täytyy käynnistää: `QT_QPA
 QT_QPA_PLATFORM=xcb freecad
 
 ```
+
+## Docker SearXNG
+  
+Asenna NPM. Asenna SearXNG Container. Tai installer step by step. Ohjeet myöhemmin.
+  
+
+```
+
+❯ docker ps -a
+CONTAINER ID   IMAGE                    COMMAND                  CREATED      STATUS                  PORTS     NAMES
+0ca6ea77c0e1   searxng/searxng:latest   "/usr/local/searxng/…"   7 days ago   Exited (0) 7 days ago             searxng
+
+❯ docker start searxng
+searxng
+
+❯ docker container list
+CONTAINER ID   IMAGE                    COMMAND                  CREATED      STATUS         PORTS                                         NAMES
+0ca6ea77c0e1   searxng/searxng:latest   "/usr/local/searxng/…"   7 days ago   Up 2 minutes   0.0.0.0:8888->8080/tcp, [::]:8888->8080/tcp   searxng
+
+```
+  
+LM STUDIO MCP.JSON tiedosto:
+  
+```
+{
+  "mcpServers": {
+    "searxng": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-searxng"
+      ],
+      "env": {
+        "SEARXNG_URL": "http://localhost:8888"
+      }
+    }
+  }
+}
+```
