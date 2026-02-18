@@ -387,7 +387,62 @@ QT_QPA_PLATFORM=xcb freecad
   
 Asenna NPM. Asenna SearXNG Container. Tai installer step by step. Ohjeet myöhemmin.
   
+[Docs Searxng | Installation docker](https://docs.searxng.org/admin/installation-docker.html#installation-container)
+  
+Container on helppo ja parempi jos ei oo servukonetta johonka rakentaa scripti
 
+[Step-by-step](https://docs.searxng.org/admin/installation-searxng.html) prosessi tai [Searxng-git](https://aur.archlinux.org/packages/searxng-git) Aur package asennus servukoneelle. Vaatii konfigurointia. Tarkemmat tiedot myöhemmin:
+  
+-> `kate /etc/searxng/settings.yml` ->
+  
+```
+use_default_settings: true
+server:
+    bind_address: "192.168.178.103"
+    secret_key: "c" # <- piiloitettu info
+    limiter: true
+    base_url: "http://192.168.178.103:8888/"
+valkey:
+  url: unix:///run/valkey/valkey.sock?password=yourpassword&db=1 # <- Vaiha salasana
+checker:
+    scheduling:
+    start_after: [300, 1800]  # delay to start the first run of the checker
+    every: [86400, 90000]     # how often the checker runs
+
+```
+Valkey conffaus:
+
+`kate /etc/valkey.conf` -> `requirepass your_strong_password_here`
+
+  Docker configurointi ja käynnistys:
+
+```
+mkdir -p ~/searxng/config ~/searxng/data
+cd ~/searxng
+```
+  
+```
+docker run --name searxng -d \
+  -p 8888:8080 \
+  -v "$HOME/searxng/config:/etc/searxng" \
+  -v "$HOME/searxng/data:/var/cache/searxng" \
+  docker.io/searxng/searxng:latest
+```
+"This follows the official install instructions: create config & data folders and mount them to /etc/searxng and /var/cache/searxng."
+
+`kate /home/sakurazer/searxng/config/settings.yml` | `kate ~/searxng/config/settings.yml`
+
+Tämä muokkaus ->
+  
+```
+
+search:
+  formats:
+    - html
+    - json
+
+```
+  
 ```
 
 ❯ docker ps -a
@@ -402,6 +457,8 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED      ST
 0ca6ea77c0e1   searxng/searxng:latest   "/usr/local/searxng/…"   7 days ago   Up 2 minutes   0.0.0.0:8888->8080/tcp, [::]:8888->8080/tcp   searxng
 
 ```
+  
+Docker RUN: `docker start searxng`
   
 LM STUDIO MCP.JSON tiedosto:
   
