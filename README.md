@@ -42,6 +42,7 @@ Selvittämättömät ongelmat:
 - [ONGELMA TILANTEET](#ongelma-tilanteet)
 - [FIREFOX](#Firefox)
 - [FreeCAD](#FreeCAD)
+- [Docker SearXNG Setup](#docker-searxng-setup)
   
 ## Partition
   
