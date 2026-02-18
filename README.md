@@ -462,6 +462,7 @@ Docker RUN: `docker start searxng`
   
 LM STUDIO MCP.JSON tiedosto:
   
+  
 ```
 {
   "mcpServers": {
