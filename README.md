@@ -383,7 +383,7 @@ QT_QPA_PLATFORM=xcb freecad
 
 ```
 
-## Docker SearXNG
+## Docker SearXNG Setup 
   
 Asenna NPM. Asenna SearXNG Container. Tai installer step by step. Ohjeet myöhemmin.
   
