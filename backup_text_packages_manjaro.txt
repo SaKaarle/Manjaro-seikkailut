@@ -1,3 +1,6 @@
+# Komento:
+# sudo pacman -Qe > "backup_explicitly_installed_packages.txt"
+
 7zip 25.01-1
 a52dec 0.8.0-2
 aalib 1.4rc5-19
