@@ -94,7 +94,88 @@ GRUB_DISTRIBUTOR='Manjaro'
 GRUB_CMDLINE_LINUX_DEFAULT='quiet splash resume=UUID=4c564bec-d05d-486e-8565-eda1a3cfddc2 udev.log_priority=3' # TAI GRUB_CMDLINE_LINUX="amdgpu.ppfeaturemask=0xffffffff amdgpu.dc=1 amdgpu.runpm=0 amdgpu.dcdebugmask=0x10 amdgpu.dcdebugmask=0x12 amdgpu.dcdebugmask=0x400 split_lock_detect=off". Vähentää mahd. näyttiksen kaatumista kernelin tasolla. AMDGPU:lla jokin ongelma
 GRUB_CMDLINE_LINUX="amdgpu.dcdebugmask=0x400 split_lock_detect=off"
 
-...
+# GRUB boot loader configuration
+# resume=UUID=4c564bec-d05d-486e-8565-eda1a3cfddc2 # amdgpu.dcdebugmask=0x400
+```
+### 2026 backuppi ->
+``` 
+
+GRUB_DEFAULT="saved"
+GRUB_TIMEOUT="5"
+GRUB_DISTRIBUTOR="Manjaro"
+GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nvme_load=YES quiet resume=UUID=4c564bec-d05d-486e-8565-eda1a3cfddc2 udev.log_priority=3 #quiet splash udev.log_priority=3"
+GRUB_CMDLINE_LINUX="amdgpu.dcdebugmask=0x10 amdgpu.dcdebugmask=0x12 amdgpu.dc=1 amdgpu.ppfeaturemask=0xffffffff amdgpu.dcdebugmask=0x400 amdgpu.dcdebugmask=0x410 split_lock_detect=off"
+# amdgpu.dcdebugmask="0x400"
+# amdgpu.dcdebugmask="0x410"
+# amdgpu.dc=1 amdgpu.runpm=0
+# amdgpu.runpm=0
+# amdgpu.vrr_support=0
+# amdgpu.dcdebugmask=0x10 amdgpu.dcdebugmask=0x12 diagnosis
+# Preload both GPT and MBR modules so that they are not missed
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+
+# Uncomment to enable booting from LUKS encrypted devices
+#GRUB_ENABLE_CRYPTODISK="y"
+
+# Set to 'countdown' or 'menu' to change timeout behavior,
+# press ESC key to display menu.
+GRUB_TIMEOUT_STYLE="menu"
+
+# Uncomment to use basic console
+GRUB_TERMINAL_INPUT="console"
+
+# Uncomment to disable graphical terminal
+#GRUB_TERMINAL_OUTPUT="console"
+
+# The resolution used on graphical terminal
+# note that you can use only modes which your graphic card supports via VBE
+# you can see them in real GRUB with the command 'videoinfo'
+GRUB_GFXMODE="2560x1440"
+
+# Uncomment to allow the kernel use the same resolution used by grub
+GRUB_GFXPAYLOAD_LINUX="keep"
+
+# Uncomment if you want GRUB to pass to the Linux kernel the old parameter
+# format "root=/dev/xxx" instead of "root=/dev/disk/by-uuid/xxx"
+#GRUB_DISABLE_LINUX_UUID="true"
+
+# Uncomment to disable generation of recovery mode menu entries
+GRUB_DISABLE_RECOVERY="true"
+
+# Uncomment and set to the desired menu colors.  Used by normal and wallpaper
+# modes only.  Entries specified as foreground/background.
+export GRUB_COLOR_NORMAL="light-gray/black"
+export GRUB_COLOR_HIGHLIGHT="green/black"
+
+# Uncomment one of them for the gfx desired, a image background or a gfxtheme
+GRUB_BACKGROUND="/usr/share/grub/background.png"
+GRUB_THEME="/usr/share/grub/themes/manjaro/theme.txt"
+
+# Uncomment to get a beep at GRUB start
+#GRUB_INIT_TUNE="480 440 1"
+
+# Uncomment to make GRUB remember the last selection. This requires
+# setting 'GRUB_DEFAULT=saved' above.
+GRUB_SAVEDEFAULT="true"
+
+# Uncomment to disable submenus in boot menu
+#GRUB_DISABLE_SUBMENU="y"
+
+# Uncomment this option to enable os-prober execution in the grub-mkconfig command
+#GRUB_DISABLE_OS_PROBER="false"
+
+# Uncomment to ensure that the root filesystem is mounted read-only so that
+# systemd-fsck can run the check automatically. We use 'fsck' by default, which
+# needs 'rw' as boot parameter, to avoid delay in boot-time. 'fsck' needs to be
+# removed from 'mkinitcpio.conf' to make 'systemd-fsck' work.
+# See also Arch-Wiki: https://wiki.archlinux.org/index.php/Fsck#Boot_time_checking
+#GRUB_ROOT_FS_RO="true"
+
+# Uncomment this option to enable os-prober execution in the grub-mkconfig command
+GRUB_DISABLE_OS_PROBER="false"
+
+#GRUB_HIDDEN_TIMEOUT="0"
+
 ```
   
 Toinen mahdollinen fikis:
@@ -123,9 +204,12 @@ MOZ_ENABLE_WAYLAND=1
 KWIN_DRM_NO_DIRECT_SCANOUT=1
 #WINEPREFIX=~/.wine
 #WINEARCH=win64
+```
+Otin pois 2026.03. MangoHUD sys_env arvot. Poistin koska halusin varmistaa ettei ole yhteensopivuusongelmia minkään kanssa.
+Eli:
 
-## 2025 joulu ##
-
+```
+## 2026.03 ##
 #
 # This file is parsed by pam_env module
 #
@@ -134,9 +218,9 @@ KWIN_DRM_NO_DIRECT_SCANOUT=1
 
 # WINEARCH=win32 WINEPREFIX=~/.wine winecfg
 
-MANGOHUD=1
+# MANGOHUD=1
 # MANGOHUD_DLSYM=1
-LD_PRELOAD=/usr/lib/mangohud/libMangoHud.so
+# LD_PRELOAD=/usr/lib/mangohud/libMangoHud.so
 GTK_USE_PORTAL=1
 MOZ_ENABLE_WAYLAND=1
 KWIN_DRM_NO_DIRECT_SCANOUT=1
@@ -145,7 +229,6 @@ AMD_VULKAN_ICD=RADV
 MESA_SHADER_CACHE_MAX_SIZE=20G
 # WINEPREFIX=~/.wine
 # WINEARCH=win64 WINEPREFIX=~/.wine winecfg
-
 
 ```
 
@@ -261,7 +344,7 @@ Lista omista ehdottoman lenppareista lemppari sovelluksista ilman pahempaa syyt�
   - Fsearch löytää paremmin kaikki
   - Catfish löytää tekstin sisältä paremmin kaikki. Hyvä olla molemmat valmiina asennettuna.
 - Kate = Notepad++
-- Gparted
+- Gparted TAI "gnome-disks"
 - Lutris
 - LACT (AMD GPU overclock tool)
 - GPU Screen Recorder (Shadow Play UI:lla)
@@ -276,6 +359,7 @@ Lista omista ehdottoman lenppareista lemppari sovelluksista ilman pahempaa syyt�
   
 Se tärkein: Pelaaminen. Lutrisin asennat niin saat "System (10.7(Staging))" jolla pystytään esim asentamaan Lutrisin sisäisesti Epic Games Launcherin.
 Wine32 on tärkeää kans asentaa ja sille löytyy hyvät ohjeet:
+**TÄRKEÄÄ:** Wine32 on aika "surkea" nykyään. Wine 11.0 / Staging toimii mainiosti ja on suositeltavaa. 16-bit ja 32-bit tuki. NTSync ominaisuudet etc.
 
 https://github.com/lutris/docs/blob/master/WineDependencies.md
   
@@ -301,7 +385,7 @@ lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader sdl2-compa
 
 ```
   
-Asiaan tullut mahdollinen muutos koska Wine on tyhmä ja devit päätti lopettaa melkeen kokonaan 32-bit yhteensopivuuden, niin Wine32 paketti pitää asentaa jos haluaa uudemmat 32-bit supportit ja pelata esimerkiksi Deus Ex tai muita 32-bit pelejä Winellä.
+**Vanhentunutta tietoa:** Asiaan tullut mahdollinen muutos koska Wine on tyhmä ja devit päätti lopettaa melkeen kokonaan 32-bit yhteensopivuuden, niin Wine32 paketti pitää asentaa jos haluaa uudemmat 32-bit supportit ja pelata esimerkiksi Deus Ex tai muita 32-bit pelejä Winellä.
   
 ```
 https://aur.archlinux.org/packages/wine32
@@ -315,11 +399,13 @@ yay -S wine32
 Asenna se pacmanilla. Thas it
   
 `sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/VencordInstaller/main/install.sh)"`
+`sh -c "$(curl -sS https://vencord.dev/install.sh)"`
+
   
 ## ONGELMA TILANTEET
   
 Launchaa sovellus tai muu terminaalin kautta. Esimerkki debuggauksesta:
-
+  
  INFO drg_mod_integration: writing logs to `/home/saku/.local/share/drg-mod-integration/drg-mod-integration.log`
 interface 'wl_surface' has no event 2
   
