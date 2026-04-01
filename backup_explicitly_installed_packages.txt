@@ -1,3 +1,4 @@
+# sudo pacman -Qe > "backup_explicitly_installed_packages.txt"  
 7zip 25.01-1
 acpi 1.8-2
 acpid 2.0.34-2
