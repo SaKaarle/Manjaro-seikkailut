@@ -18,6 +18,7 @@ find ~ -name "system.reg" -type f
 `WINEPREFIX=/home/saku/Games/gog/deus-ex-invisible-war winetricks`
 `WINE=/home/saku/.local/share/lutris/runners/wine/wine-10.19-amd64/bin/wine WINEPREFIX=/home/saku/Games/gog/deus-ex-invisible-war winetricks`
 
+**TÄRKEÄÄ**: Wine 11.0 toimii hyvin ja supportaa 32bit pelejä ja sovelluksia. AUR paketti Wine32 ei sisällä NTSync:iä joka voi tuoda paljon performancea. 
 
 ZINK > OPENGL
   
@@ -80,7 +81,7 @@ PROTON_ENABLE_WAYLAND=1 = Vulkan peleille?
 
 Gamemode check mangohudille: `LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so`
 ## GAMESCOPE
-
+Ei toimi, "Lag Bomb" tulee noin 20min jälkeen.
 ` gamescope -w 1920 -h 1080 -f --force-grab-cursor -- gamemoderun PROTON_ENABLE_WAYLAND=1  %command% `
 
 ## CS2
@@ -91,12 +92,16 @@ Gamemode check mangohudille: `LD_PRELOAD=$LD_PRELOAD:/usr/lib32/libgamemode.so`
   
 ## NOITA
   
+```
+LD_PRELOAD=/usr/lib/mangohud/ gamemoderun mangohud %command%
 gamescope -w 1920 -h 1080 -- gamemoderun PROTON_ENABLE_WAYLAND=1 mangohud %command%
 gamescope -w 1920 -h 1080 -- gamemoderun MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink PROTON_ENABLE_WAYLAND=1 mangohud %command%
 MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink gamemoderun PROTON_ENABLE_WAYLAND=1 mangohud %command%
 gamemoderun MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink PROTON_ENABLE_WAYLAND=1 mangohud %command%
+gamescope -w 2560 -h 1440 -f -r 280 --force-grab-cursor --expose-wayland -- gamemoderun MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink %command%
   
-
+```
+  
 ## MGS2:
 Eitoimi mut: 
 `gamemoderun PROTON_ENABLE_WAYLAND=1 WINEDLLOVERRIDES="wininet,winhttp=n,b" %command%`
